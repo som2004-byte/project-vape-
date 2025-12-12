@@ -1,5 +1,5 @@
 import React from 'react'
-export default function Navbar(){
+export default function Navbar({ user, onLogout }){
   return (
     <header className="sticky top-0 z-40 bg-black/40 backdrop-blur-md border-b border-black/30">
       <div className="container mx-auto px-6 py-3 flex items-center justify-between">
@@ -15,7 +15,17 @@ export default function Navbar(){
         </div>
 
         <div className="flex items-center gap-4">
-          <button className="px-3 py-2 rounded-full bg-transparent border border-neutral-800">Account</button>
+          {user && (
+            <span className="text-gray-300 text-sm px-3 py-2">
+              {user.username || user.email}
+            </span>
+          )}
+          <button 
+            onClick={onLogout}
+            className="px-3 py-2 rounded-full bg-transparent border border-neutral-800 hover:border-purple-600 transition-colors"
+          >
+            {user ? 'Logout' : 'Account'}
+          </button>
           <button className="px-3 py-2 rounded-full bg-yellow-500 text-black font-medium">Cart</button>
         </div>
       </div>
